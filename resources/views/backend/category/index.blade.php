@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-    Danh mục
+Danh mục
 @endsection
 
 @section('content')
@@ -15,39 +15,50 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12 text-right">
-                    <a href="{{ route('categories.create') }}" class="btn btn-primary m-2">Add</a>
-                </div>
                 <div class="col-md-12">
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tên danh mục</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách</h3>
+                            <div class="card-tools">
+                                <a href="{{ route('categories.create') }}" class="btn btn-success btn-sm float-right"><i class="fas fa-plus"></i> Thêm mới</a>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Tên danh mục (ID)</th>
+                                        <th scope="col">Slug</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                            @foreach ($categories as $category)
+                                    @foreach ($categories as $index => $category)
 
-                                <tr>
-                                    <th scope="row">{{ $category->id }}</th>
-                                    <td>{{ $category->name }}</td>
-                                    <td>
-                                        <a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-default">Edit</a>
-                                        <a href="{{ route('categories.delete', ['id' => $category->id]) }}" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <th scope="row">{{ $index+1 }}</th>
+                                            <td>{{ $category->name }} ({{ $category->id }})</td>
+                                            <td>{{ $category->slug }}</td>
+                                            <td>
+                                                <a href="{{ route('categories.edit', ['id' => $category->id]) }}"
+                                                    class="btn btn-default">Edit</a>
+                                                <a href="{{ route('categories.delete', ['id' => $category->id]) }}"
+                                                    class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
 
-                            @endforeach
+                                    @endforeach
 
-                        
-                        </tbody>
-                      </table>
-                </div>
-                <div class="col-md-12">
-                    {{ $categories->links() }}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer clearfix">
+                            {{ $categories->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->

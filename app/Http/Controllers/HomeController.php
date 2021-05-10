@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
+use App\Components\Recusive;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $category = new Category();
+        $data = $category->all();
+        return view('home', compact('data'));
     }
 
     /**

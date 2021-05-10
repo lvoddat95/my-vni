@@ -20,7 +20,7 @@ class CategoryController extends Controller
     public function index()
     {   
         // Lay du lieu moi nhat tu Modal category bang phuong thuc lastest(), phan trang 5 ban ghi paginate(5)
-        $categories = $this->category->latest()->paginate(5);
+        $categories = $this->category->paginate(10);
         // tra ve view category.index, truyen bien $categories qua view
         return view('backend.category.index', compact('categories'));
     }
@@ -38,11 +38,12 @@ class CategoryController extends Controller
     // Phuong thuc them moi danh muc vao category
     public function store(Request $request)
     {
+        $slug = empty($request->slug) ? str_slug($request->name) : $request->slug;
         // Lay gia tri Request tu form name
         $this->category->create([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'slug' => str_slug($request->name)
+            'slug' => $slug
         ]);
         
         // Them thanh cong redirect ve route categories.index

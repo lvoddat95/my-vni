@@ -29,8 +29,12 @@
         <!-- Main navigation -->
         <div class="card card-sidebar-mobile">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
+                @php
+                    
+                    
+                @endphp
 
-                @foreach ($menu as $item)
+                {{-- @foreach ($data as $item)
 
                     <li class="nav-item {{ $item->menuChildren->count() ? 'nav-item-submenu' : '' }}">
                         <a href="" class="nav-link">
@@ -43,7 +47,7 @@
                         @endif
                     </li>
 
-                @endforeach
+                @endforeach --}}
 
                 {{-- <li class="nav-item">
                     <a href="{{ route('frontend.qlac.index') }}" class="nav-link active" data-menu-title="Bảng điều khiển">
